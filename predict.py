@@ -5,6 +5,7 @@ import torch
 from transformers import ViTImageProcessor, ViTForImageClassification
 from PIL import Image
 from pathlib import Path
+import PIL
 
 
 def configure_arg_parser():

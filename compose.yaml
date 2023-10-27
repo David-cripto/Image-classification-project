@@ -2,9 +2,9 @@ services:
   classification:
     build:
       context: .
-      args:
-        IMG: ${IMG}
-        IMG_PATH: ${IMG_PATH}
+    environment:
+      IMG: ${IMG}
+      IMG_PATH: ${IMG_PATH}
     volumes:
       - classification-config:${IMG_PATH}
 
