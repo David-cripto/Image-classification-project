@@ -1,5 +1,6 @@
-import requests
 import argparse
+import requests
+import torch
 
 from transformers import ViTImageProcessor, ViTForImageClassification
 from PIL import Image
@@ -32,8 +33,17 @@ def get_image(path: str):
     return image
 
 
+def return_prediction(logits, thr=0.95):
+    probs = torch.exp(logits) / torch.exp(logits).sum()
+    if probs[0, 0] > thr:
+        return "a cat"
+    elif probs[0, 1] > thr:
+        return "a dog"
+    else:
+        return "an unidentified thing"
+
+
 def main(path_2_img: str):
-    labels = ["cat", "dog"]
 
     try:
         image = get_image(path_2_img)
@@ -43,7 +53,8 @@ def main(path_2_img: str):
         inputs = feature_extractor(images=image, return_tensors="pt")
 
         outputs = model(**inputs)
-        print(f"This is a {labels[outputs.logits.argmax()]}!")
+        prediction = return_prediction(outputs.logits)
+        print(f"This is {prediction}!")
 
     except KeyboardInterrupt:
         print("\nSystem shutdown")
