@@ -1,7 +1,8 @@
 services:
   classification:
     build:
-      context: .
+      context: ..
+      dockerfile: services/classification/Dockerfile
     environment:
       IMG: ${IMG}
       IMG_PATH: ${IMG_PATH}
