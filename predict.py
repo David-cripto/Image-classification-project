@@ -1,10 +1,16 @@
 import requests
+import argparse
 
 from transformers import ViTImageProcessor, ViTForImageClassification
 from PIL import Image
+from pathlib import Path
 
+def configure_arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("image_path", type=str, help="Path for image to classify")
+    return parser
 
-def get_image(path): 
+def get_image(path: str): 
     if path.startswith("http"):
         try:
             image_path = requests.get(path, stream=True).raw
@@ -26,27 +32,23 @@ def get_image(path):
     return image
 
 
-def main():
+def main(path_2_img: str):
     labels = ["cat", "dog"]
 
-    while True:
-        try:
-            path = input("Enter image path/url: ")
-            image = get_image(path)
-            if image is None:
-                continue
+    try:
+        image = get_image(path_2_img)
 
-            feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
-            model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
-            inputs = feature_extractor(images=image, return_tensors="pt")
+        feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
+        model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
+        inputs = feature_extractor(images=image, return_tensors="pt")
 
-            outputs = model(**inputs)
-            print(f"This is a {labels[outputs.logits.argmax()]}!")
+        outputs = model(**inputs)
+        print(f"This is a {labels[outputs.logits.argmax()]}!")
 
-        except KeyboardInterrupt:
-            print("\nSystem shutdown")
-            break
+    except KeyboardInterrupt:
+        print("\nSystem shutdown")
 
 if __name__ == "__main__":
-    main()
+    args = configure_arg_parser().parse_args()
+    main(args.image_path)
 
