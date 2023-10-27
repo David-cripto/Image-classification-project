@@ -56,8 +56,12 @@ def main(path_2_img: str):
 
     outputs = model(**inputs)
     prediction = return_prediction(outputs.logits)
-    print(f"This is {prediction}!")
 
+    FIFO = "/tmp/trans"
+    res = f"This is {prediction}!"
+    fifo = open(FIFO, 'w')
+    fifo.write(res + " " * (100 - len(res)))
+    fifo.close()
 
 if __name__ == "__main__":
     args = configure_arg_parser().parse_args()
