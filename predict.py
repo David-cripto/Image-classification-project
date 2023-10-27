@@ -6,10 +6,12 @@ from transformers import ViTImageProcessor, ViTForImageClassification
 from PIL import Image
 from pathlib import Path
 
+
 def configure_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("image_path", type=str, help="Path for image to classify")
     return parser
+
 
 def get_image(path: str): 
     if path.startswith("http"):
@@ -45,19 +47,16 @@ def return_prediction(logits, thr=0.95):
 
 def main(path_2_img: str):
 
-    try:
-        image = get_image(path_2_img)
+    image = get_image(path_2_img)
 
-        feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
-        model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
-        inputs = feature_extractor(images=image, return_tensors="pt")
+    feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
+    model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
+    inputs = feature_extractor(images=image, return_tensors="pt")
 
-        outputs = model(**inputs)
-        prediction = return_prediction(outputs.logits)
-        print(f"This is {prediction}!")
+    outputs = model(**inputs)
+    prediction = return_prediction(outputs.logits)
+    print(f"This is {prediction}!")
 
-    except KeyboardInterrupt:
-        print("\nSystem shutdown")
 
 if __name__ == "__main__":
     args = configure_arg_parser().parse_args()
