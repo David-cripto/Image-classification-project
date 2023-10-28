@@ -14,7 +14,7 @@ def configure_arg_parser():
     return parser
 
 
-def get_image(path: str): 
+def get_image(path): 
     if path.startswith("http"):
         try:
             image_path = requests.get(path, stream=True).raw
@@ -46,18 +46,23 @@ def return_prediction(logits, thr=0.95):
         return "an unidentified thing"
 
 
-def main(path_2_img: str):
+def main(path_2_img):
 
     image = get_image(path_2_img)
 
     feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
     model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
-    inputs = feature_extractor(images=image, return_tensors="pt")
+    
+    if image is not None:
+        inputs = feature_extractor(images=image, return_tensors="pt")
+        outputs = model(**inputs)
+        prediction = return_prediction(outputs.logits)
 
-    outputs = model(**inputs)
-    prediction = return_prediction(outputs.logits)
-    print(f"This is {prediction}!")
-
+        FIFO = "/tmp/trans"
+        res = f"This is {prediction}!"
+        fifo = open(FIFO, 'w')
+        fifo.write(res + " " * (100 - len(res)))
+        fifo.close()
 
 if __name__ == "__main__":
     args = configure_arg_parser().parse_args()
