@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 from PIL import Image
 import requests
-from predict import main, get_image, return_prediction
+from scripts.predict import main, get_image, return_prediction
 
 
 class TestGetImage(unittest.TestCase):
