@@ -1,6 +1,6 @@
 CXX = g++
 RM = rm -rf
-PY = python
+PY = python3
 
 OBJS = print_result.o
 SCR = scripts
