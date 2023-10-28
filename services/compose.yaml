@@ -1,8 +1,14 @@
 services:
+  web:
+    build: 
+      context: ..
+      dockerfile: services/web/Dockerfile
+    ports:
+      - "8000:5000"
   classification:
     build:
       context: ..
-      dockerfile: services/classification/Dockerfile
+      dockerfile: services/classification/Dockerfile  
     environment:
       IMG: ${IMG}
       IMG_PATH: ${IMG_PATH}

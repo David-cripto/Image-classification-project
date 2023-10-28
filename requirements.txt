@@ -1,4 +1,7 @@
 transformers
 torch==2.1.0
 Pillow
-os
+flask==2.1.3
+Flask-Uploads
+Flask-WTF
+Werkzeug==0.16.0
