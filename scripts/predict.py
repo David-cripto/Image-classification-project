@@ -64,6 +64,9 @@ def main(path_2_img):
         fifo.write(res + " " * (100 - len(res)))
         fifo.close()
 
+    #if web_service is not active:
+    #    print("F")
+
 if __name__ == "__main__":
     args = configure_arg_parser().parse_args()
     main(args.image_path)
