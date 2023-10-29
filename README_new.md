@@ -100,7 +100,7 @@ make test
 
 [David Li](https://github.com/David-cripto)
 
-[Kneniia Petrushina](https://github.com/pkseniya)
+[Kseniia Petrushina](https://github.com/pkseniya)
 
 [Arina Chumachenko](https://github.com/arina-chumachenko)
 
