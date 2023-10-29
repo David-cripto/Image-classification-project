@@ -7,11 +7,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Add dependencies
-            - run: ./prereqs.sh
+              run: ./prereqs.sh
 
             - name: Build
-            - run: ./build.sh
+              run: ./build.sh
 
             - name: Test
-            - run: ./test.sh
+              run: ./test.sh
             
