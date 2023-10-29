@@ -1,12 +1,4 @@
 services:
-  # web:
-  #   build: 
-  #     context: ..
-  #     dockerfile: services/web/Dockerfile
-  #   ports:
-  #     - "8000:5000"
-  #   volumes:
-  #     - asset-volume:/root/images
   classification:
     build:
       context: ..
@@ -15,11 +7,9 @@ services:
       IMG: ${IMG}
       IMG_PATH: ${IMG_PATH} 
     volumes:
-      # - asset-volume:/root/images
       - classification-config:${IMG_PATH}
 
 volumes:
-  # asset-volume:
   classification-config:
     driver: local
     driver_opts:
