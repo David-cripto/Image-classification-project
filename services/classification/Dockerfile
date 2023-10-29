@@ -1,4 +1,4 @@
-FROM ubuntu:23.04 as load
+FROM ubuntu:latest as load
 
 WORKDIR /classification
 
