@@ -9,7 +9,7 @@ SECRET_KEY = os.urandom(32)
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "asvfdb"
-app.config["UPLOADED_PHOTOS_DEST"] = 'uploads'
+app.config["UPLOADED_PHOTOS_DEST"] = '/root/images'
 
 
 photos = UploadSet('photos', IMAGES)

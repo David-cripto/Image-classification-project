@@ -14,6 +14,8 @@ int main() {
     char data[100];
 
     fdData = open(transferFifo, O_RDONLY);
+    int res = read(fdData, &data, sizeof(data));
+    std::cout << res << std::endl;
     std::cout << data << std::endl;
     close(fdData);
     unlink(transferFifo);

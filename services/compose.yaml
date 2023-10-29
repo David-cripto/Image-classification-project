@@ -5,21 +5,15 @@ services:
       dockerfile: services/web/Dockerfile
     ports:
       - "8000:5000"
+    volumes:
+      - asset-volume:/root/images
   classification:
     build:
       context: ..
       dockerfile: services/classification/Dockerfile  
-    environment:
-      IMG: ${IMG}
-      IMG_PATH: ${IMG_PATH}
     volumes:
-      - classification-config:${IMG_PATH}
+      - asset-volume:/root/images
 
 volumes:
-  classification-config:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: "${IMGS_ROOT}"
+  asset-volume:
 
