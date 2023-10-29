@@ -1,4 +1,4 @@
-# Image-classification-project
+# Image classification with pretrain Neural Network
 
 ## Discription of our project
 
@@ -6,7 +6,7 @@ Our team is currently working on developing an app that utilizes a pre-trained n
 The machine learning model ([vit-base-cats-vs-dogs](https://huggingface.co/akahana/vit-base-cats-vs-dogs)) was used for classification.
 To ensure the reproducibility and scalability of our app, we wraped it with Docker. 
 This technology allows for a deployment and configuration across multiple platforms. 
-For testing and integration our team also created configuration files, such as Makefiles, that provide instructions on how to build, deploy and test the app.
+For testing and integration our team also created configuration files, such as Makefiles and yaml config for GitHUb workflows, that provide instructions on how to build, deploy and test the app.
 The final product is an app that can be easily set up within the Docker environment. 
 By providing just one image as input, users are able to rapidly classify whether it contains a dog or a cat. 
 
@@ -16,72 +16,69 @@ By providing just one image as input, users are able to rapidly classify whether
 Next engineering staff was done:
 
 - The public git repository with all source and engineering files, as well as README file with description for a successful run of the project
-- Docker container to build docker image locally ("Dockerfile")
-- Build system in form of Makefiles ("Makefile") by which:
-    - installation of requirements ("requirements")
-    - build: obtain external data, perform data preprocessing, training and model optimization ("predict", "build")
-    - test: check the critical functionality ("test") 
-        parts are done
+- Docker container to build docker image locally `Dockerfile`
+- Installation of requirements `prereqs.sh`
+- Build system in form of Makefiles `build.sh`
+- Check the critical functionality `test.sh`
 
+## Quickstart with Dockerfile
 
-
-Clone repository
+1. Clone the repository with project to your local machine:
 
 ```
 git clone https://github.com/David-cripto/Image-classification-project.git
-```
-
-
-Change directory
-
-```
-cd Image-classification-project/
-```
-
-
-
-To run the code you need package requirements. Run commands inside docker container
-
-```
-sudo pip install -r requirements.txt 
-```
-
-Ubuntu 22.04.3 LTS must be used to run this project.
-
-
-## Get started
-
-1. To make engineering stuff working follow the instructions:
-
-a)  You need to download "Dockerfile" from the current repository or you can clone the repository by 
-```
-git clone https://github.com/David-cripto/Image-classification-project.git
-``` 
-
-and build "Dockerfile" by:
-
-```
-docker build -t _____
-```
-
-If you use git clone then apply 
-```
 cd Image-classification-project
 ```
 
-2. Install requirements and then run main calculations
+2. Go to `services` directory:
+```
+cd services
+```
+And Create a `.env` file inside the `services` directory with the following content:
+```
+IMGS_ROOT=<PATH_TO_YOUR_IMAGES_DIRECTORY>
+IMG_PATH=/root/images
+```
+where `<PATH_TO_YOUR_IMAGES_DIRECTORY>` &mdash; path to your directory with image to classify
 
-Add dependencies
+3. Run the following command to classify the image:
+
 ```
-./prepeqs.sh
+sudo IMG=<IMAGE_NAME> docker compose up
+```
+where `<IMAGE_NAME>` &mdash; name of your image to classify
+
+
+## Quickstart with `.sh` scripts
+
+1. Create an empty `ubuntu:latest` docker container: 
+
+```
+docker pull ubuntu:latest
+docker run -ti --name fse_2023 ubuntu:latest
+apt-get update
+apt-get install -y git
 ```
 
-3. Build the code
+2. Clone repository with project: 
+
 ```
+git clone https://github.com/David-cripto/Image-classification-project.git
+cd Image-classification-project
+```
+
+
+3. Run the following shell scripts: 
+```
+chmod u+x ./prereqs.sh
+./prereqs.sh
+chmod u+x ./build.sh
 ./build.sh
+chmod u+x ./test.sh
+./test.sh   
 ```
 
-4. After it you can make testing by
+4. After it you can make testing by:
 ```
 ./test.sh
 ```
@@ -90,17 +87,17 @@ or
 make test
 ```
 
-5. Workflow: you can also try created workflows on GitHub 
-
-6. Our team also tried to develop an app for the project
-
+5. And also you car run the Neural network with the following command:
+```
+make run img="PATH_TO_YOUR_IMAGE"
+```
 
 
 ## Developers
 
 [David Li](https://github.com/David-cripto)
 
-[Kneniia Petrushina](https://github.com/pkseniya)
+[Kseniia Petrushina](https://github.com/pkseniya)
 
 [Arina Chumachenko](https://github.com/arina-chumachenko)
 
