@@ -16,6 +16,11 @@ class TestGetImage(unittest.TestCase):
         image = get_image(path)
         self.assertIsInstance(image, Image.Image)
 
+    def test_valid_file(self):
+        path = "images/cat.jpg"
+        image = get_image(path)
+        self.assertIsInstance(image, Image.Image)
+
     def test_invalid_file(self):
         path = "images/non_existant.jpg"
         image = get_image(path)
@@ -31,7 +36,6 @@ class TestGetImage(unittest.TestCase):
         image = get_image(path)
         self.assertIsNone(image)
 
-    
 
 class TestReturnPrediction(unittest.TestCase):
     def test_cat_return_prediction(self):
@@ -54,24 +58,20 @@ class TestReturnPrediction(unittest.TestCase):
         result = return_prediction(logits, thr=0.5)
         self.assertEqual(result, "a cat")
 
-    
-
-def mock_input(mock_values):
-    return lambda prompt: mock_values.pop(0)
 
 class MainTestCase(unittest.TestCase):
-    @patch('builtins.input', side_effect=mock_input(['cat.jpg']))
-    def test_main(self, mock_input):
-        captured_output = io.StringIO()
+    def test_main(self):
         expected_output = "This is a cat!"
+        FIFO = "/tmp/trans"
 
-        with patch('sys.stdout', new=captured_output):
-            main('cat.jpg')
+        main('images/cat.jpg')
 
-            # Assert that the printed output matches with the expected output
-            self.assertEqual(captured_output.getvalue().strip(), expected_output)
+        with open(FIFO, 'r') as fifo:
+            res = fifo.read()
+
+        self.assertTrue(res.startswith(expected_output))
 
 
 if __name__ == "__main__":
-    unittest.main(argv=['first-arg-is-ignored'], exit=False)
+    unittest.main()
 
