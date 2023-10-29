@@ -1,19 +1,28 @@
 services:
-  web:
-    build: 
-      context: ..
-      dockerfile: services/web/Dockerfile
-    ports:
-      - "8000:5000"
-    volumes:
-      - asset-volume:/root/images
+  # web:
+  #   build: 
+  #     context: ..
+  #     dockerfile: services/web/Dockerfile
+  #   ports:
+  #     - "8000:5000"
+  #   volumes:
+  #     - asset-volume:/root/images
   classification:
     build:
       context: ..
-      dockerfile: services/classification/Dockerfile  
+      dockerfile: services/classification/Dockerfile 
+    environment:
+      IMG: ${IMG}
+      IMG_PATH: ${IMG_PATH} 
     volumes:
-      - asset-volume:/root/images
+      # - asset-volume:/root/images
+      - classification-config:${IMG_PATH}
 
 volumes:
-  asset-volume:
-
+  # asset-volume:
+  classification-config:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: "${IMGS_ROOT}"

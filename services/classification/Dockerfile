@@ -1,19 +1,15 @@
-FROM pytorch/pytorch as load
+FROM ubuntu:23.04 as load
 
-RUN mkdir project_dir
+WORKDIR /classification
 
-WORKDIR project_dir
+COPY . .
 
-ADD requirements.txt requirements.txt
+RUN ./prereqs.sh
 
-RUN pip install -r requirements.txt
+RUN python3 scripts/load_model.py
 
-# ADD scripts/load_model.py load_model.py
+FROM load as predict
 
-# RUN python3 load_model.py
+RUN ./build.sh
 
-# FROM load as predict
-
-# ADD scripts/predict.py predict.py
-
-# CMD python3 predict.py $IMG_PATH/$IMG
+CMD make run img=$IMG_PATH/$IMG
