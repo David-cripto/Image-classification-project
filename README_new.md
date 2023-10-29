@@ -3,13 +3,12 @@
 ## Discription of our project
 
 Our team is currently working on developing an app that utilizes a pre-trained neural network for the purpose of classifying images into two categories: dogs and cats. 
+The machine learning model ([vit-base-cats-vs-dogs](https://huggingface.co/akahana/vit-base-cats-vs-dogs)) was used for classification.
 To ensure the reproducibility and scalability of our app, we wraped it with Docker. 
 This technology allows for a deployment and configuration across multiple platforms. 
 For testing and integration our team also created configuration files, such as Makefiles, that provide instructions on how to build, deploy and test the app.
 The final product is an app that can be easily set up within the Docker environment. 
 By providing just one image as input, users are able to rapidly classify whether it contains a dog or a cat. 
-
-Autors: David Li, Kseniia Petrushuna, Arina Chumachenko, Irina Lebedeva, Ilona Basset
 
 
 ## Short discription of the code
@@ -47,6 +46,7 @@ To run the code you need package requirements. Run commands inside docker contai
 sudo pip install -r requirements.txt 
 ```
 
+Ubuntu 22.04.3 LTS must be used to run this project.
 
 
 ## Get started
@@ -84,7 +84,24 @@ Add dependencies
 4. After it you can make testing by
 ```
 ./test.sh
+```
+or
+```
 make test
 ```
 
-5. Workflow 
+5. Workflow: you can also try created workflows on GitHub 
+
+6. Our team also tried to develop an app for the project
+
+
+
+## Developers
+
+[David Li](https://github.com/David-cripto)
+
+[Kneniia Petrushina](https://github.com/pkseniya)
+
+[Arina Chumachenko](https://github.com/arina-chumachenko)
+
+[Irina Lebedeva](https://github.com/swnirk)
