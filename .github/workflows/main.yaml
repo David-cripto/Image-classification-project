@@ -1,0 +1,17 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+    build_and_test: 
+        runs-on: ubuntu-latest
+        steps:
+            - name: Add dependencies
+            - run: ./prereqs.sh
+
+            - name: Build
+            - run: ./build.sh
+
+            - name: Test
+            - run: ./test.sh
+            
