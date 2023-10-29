@@ -52,7 +52,7 @@ def main(path_2_img):
 
     feature_extractor = ViTImageProcessor.from_pretrained('google/vit-base-patch16-224-in21k')
     model =  ViTForImageClassification.from_pretrained('akahana/vit-base-cats-vs-dogs')
-    
+
     if image is not None:
         inputs = feature_extractor(images=image, return_tensors="pt")
         outputs = model(**inputs)

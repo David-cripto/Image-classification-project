@@ -4,3 +4,5 @@ flask
 Flask-Reuploaded
 Flask-WTF
 Werkzeug==2.2.2
+torch
+requests
