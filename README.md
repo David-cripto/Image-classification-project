@@ -13,16 +13,16 @@ By providing just one image as input, users are able to rapidly classify whether
 
 ## Short discription of the code
 
-Next engineering staff was done:
+Our team has completed the following tasks:
 
-- The public git repository with all source and engineering files, as well as README file with description for a successful run of the project
-- Docker container to build docker image locally ("Dockerfile")
-- Build system in form of Makefiles ("Makefile") by which:
-    - installation of requirements ("requirements")
+- A public Git repository was created, it contains all the necessary source code and files. Additionally, a detailed README file has been included in the repository, providing instructions for running the project successfully
+
+- A Docker container has been developed to enable the local building of the Docker image. This has been achieved through the creation of a "Dockerfile" that specifies the necessary configurations.
+
+- Build system in Makefiles form ("Makefile") by which it can be resolved:
+    - installation of project requirements ("requirements")
     - build: obtain external data, perform data preprocessing, training and model optimization ("predict", "build")
     - test: check the critical functionality ("test") 
-        parts are done
-
 
 
 Clone repository
